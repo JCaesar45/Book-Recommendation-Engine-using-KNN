@@ -1,0 +1,11 @@
+import pandas as pd
+from sklearn.neighbors import NearestNeighbors
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# Load the dataset
+ratings = pd.read_csv('BX-Book-Ratings.csv', sep=';', encoding='latin-1', low_memory=False)
+books = pd.read_csv('BX-Books.csv', sep=';', encoding='latin-1', low_memory=False)
+
+# Display the first few entries from the ratings dataset
+ratings.head()
