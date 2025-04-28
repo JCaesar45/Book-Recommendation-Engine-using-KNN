@@ -1,0 +1,2 @@
+model = NearestNeighbors(n_neighbors=6, algorithm='auto', metric='euclidean')
+model.fit(X_scaled)
