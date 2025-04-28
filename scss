@@ -1,0 +1,8 @@
+# Filter users and books based on the criteria
+user_counts = ratings['User-ID'].value_counts()
+book_counts = ratings['ISBN'].value_counts()
+
+valid_users = user_counts[user_counts >= 200].index
+valid_books = book_counts[book_counts >= 100].index
+
+filtered_ratings = ratings[ratings['User-ID'].isin(valid_users) & ratings['ISBN'].isin(valid_books)]
