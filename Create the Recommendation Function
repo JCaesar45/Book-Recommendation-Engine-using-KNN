@@ -1,0 +1,20 @@
+def get_recommends(book_title):
+    # Find the ISBN of the given book title
+    book_isbn = books[books['Book-Title'] == book_title]['ISBN'].values[0]
+    
+    if book_isbn not in book_matrix.columns:
+        return f"Book '{book_title}' not found in dataset."
+    
+    # Get the index of the book in the matrix
+    book_index = book_matrix.columns.get_loc(book_isbn)
+    
+    # Find the neighbors
+    distances, indices = model.kneighbors(X_scaled[:, book_index].reshape(1, -1), n_neighbors=6)
+    
+    similar_books = []
+    for distance, idx in zip(distances[0][1:], indices[0][1:]):
+        similar_book_isbn = book_matrix.columns[idx]
+        similar_book_title = books[books['ISBN'] == similar_book_isbn]['Book-Title'].values[0]
+        similar_books.append([similar_book_title, distance])
+    
+    return [book_title, similar_books]
